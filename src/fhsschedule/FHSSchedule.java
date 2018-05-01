@@ -1,6 +1,9 @@
 package fhsschedule;
 
 import java.util.*;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Jan Bobda
 public class FHSSchedule {
@@ -9,11 +12,74 @@ public class FHSSchedule {
     static ArrayList<Student> students = new ArrayList();
     static ArrayList<Teacher> teachers = new ArrayList();
     
+    //File Setup
+    private static Scanner reader;
+    private static File scheduleFile;
+    private static FileWriter baseWriter;
+    private static BufferedWriter writer;
+    
     public static void main(String[] args){
         start();
     }
     
+    public static void loadFile(){
+        String operatingSystem = System.getProperty("os.name");
+        //This creates the file where the schedule will be stored
+        switch(operatingSystem){
+            case "Windows": scheduleFile = new File("C://temp//schedule_file.txt");
+                break;
+            case "macOs": System.out.println("macOS is not supported yet.");
+                return;
+            case "Linux": scheduleFile = new File("/home/jan/schedule_file.txt");
+                break;
+            default: scheduleFile = new File("C://temp//schedule_file.txt");
+                break;
+        }
+        
+        try{
+            if(scheduleFile.createNewFile()){
+                //Write base template for the file
+                writeFile("Name","ID" ,"Period 1" ,"Period 2", "Period 3" ,"Period 4","Period 5" ,"Period 6" ,"Period 7", "Period 8");
+            }
+        }catch(Exception error){
+            System.out.println(error.getMessage());
+            return;
+        }
+        
+        //This creates a scanner that is able to read through the file 
+        try{
+            reader = new Scanner(scheduleFile);
+        }catch(Exception error){
+            System.out.println(error.getMessage());
+            return;
+        }
+    }
+    
+    public static void writeFile(String name, String ID, String one, String two, String three, String four,
+            String five, String six ,String seven ,String eight){
+        //This creates a filewriter to be able to store information in the schedule
+        try{
+            baseWriter = new FileWriter(scheduleFile);
+            writer = new BufferedWriter(baseWriter);
+            writer.write(name + " " + ID + " " + one + " " + two + " " + three + " " + four + " " + 
+                    five + " " + six + " " + seven + " " + eight);
+            writer.newLine();
+        }catch(Exception error){
+            System.out.println(error.getMessage());
+            return;
+        }finally{
+            try {
+                writer.close();
+                baseWriter.close();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+            
+        }
+    }
+    
     private static void start(){ 
+        loadFile();
         schedule.fillSchedule();
         //Student objects to store in various classes (Name, ID)
         Student Jan = new Student("Jan", 1);
