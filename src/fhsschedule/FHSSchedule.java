@@ -24,13 +24,13 @@ public class FHSSchedule {
         String operatingSystem = System.getProperty("os.name");
         //This creates the file where the schedule will be stored
         switch(operatingSystem){
-            case "Windows": scheduleFile = new File("C://temp//schedule_file.txt");
+            case "Windows 7": scheduleFile = new File("C:\\Users\\J.Bobda\\Desktop\\schedule_file.txt");
                 break;
             case "macOs": System.out.println("macOS is not supported yet.");
                 return;
             case "Linux": scheduleFile = new File("/home/jan/schedule_file.txt");
                 break;
-            default: scheduleFile = new File("C://temp//schedule_file.txt");
+            default: scheduleFile = new File("C:\\Users\\J.Bobda\\Desktop\\schedule_file.txt");
                 break;
         }
         
