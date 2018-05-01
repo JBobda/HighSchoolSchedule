@@ -45,7 +45,9 @@ public class FHSSchedule {
             System.out.println(error.getMessage());
             return;
         }
-        
+    }
+    
+    public static void createReader(){
         //This creates a scanner that is able to read through the file 
         try{
             reader = new Scanner(scheduleFile);
@@ -80,6 +82,11 @@ public class FHSSchedule {
     
     private static void start(){ 
         loadFile();
+        createReader();
+        writeFile("Jan", "1" , null, null, "ComputerScience", null, null, null, null, null);
+        while(reader.hasNext()){
+            System.out.println(reader.nextLine());
+        }
         schedule.fillSchedule();
         //Student objects to store in various classes (Name, ID)
         Student Jan = new Student("Jan", 1);
