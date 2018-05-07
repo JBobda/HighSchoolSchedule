@@ -39,6 +39,8 @@ public class FHSSchedule {
         try{
             if(scheduleFile.createNewFile()){
                 //Write base template for the file
+                baseWriter = new FileWriter(scheduleFile);
+                writer = new BufferedWriter(baseWriter);
                 writeFile("Name","ID" ,"Period 1" ,"Period 2", "Period 3" ,"Period 4","Period 5" ,"Period 6" ,"Period 7", "Period 8");
             }
         }catch(Exception error){
@@ -61,22 +63,12 @@ public class FHSSchedule {
             String five, String six ,String seven ,String eight){
         //This creates a filewriter to be able to store information in the schedule
         try{
-            baseWriter = new FileWriter(scheduleFile);
-            writer = new BufferedWriter(baseWriter);
             writer.write(name + " " + ID + " " + one + " " + two + " " + three + " " + four + " " + 
                     five + " " + six + " " + seven + " " + eight);
             writer.newLine();
         }catch(Exception error){
             System.out.println(error.getMessage());
             return;
-        }finally{
-            try {
-                writer.close();
-                baseWriter.close();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-            
         }
     }
     
@@ -317,6 +309,12 @@ public class FHSSchedule {
                     }
                     break;
                 case 8:
+                    try {
+                        writer.close();
+                        baseWriter.close();
+                    } catch (Exception ex) {
+                        System.out.println("The file was not created.");
+                    }
                     break ultraLoop;
             }
         }
