@@ -35,16 +35,28 @@ public class FHSSchedule {
             default: scheduleFile = new File("C:\\Users\\J.Bobda\\Desktop\\schedule_file.txt");
                 break;
         }
+
+        //Instantiate File reader
+        try{
+            baseWriter = new FileWriter(scheduleFile);
+            writer = new BufferedWriter(baseWriter);
+        }catch(Exception e){
+            System.out.println("There was an error.");
+            System.exit(0);
+        }
         
         try{
-            if(scheduleFile.createNewFile()){
-                //Write base template for the file
-                baseWriter = new FileWriter(scheduleFile);
-                writer = new BufferedWriter(baseWriter);
+            //Does this if file exists
+            if(scheduleFile.exists()){
                 writeFile("Name","ID" ,"Period 1" ,"Period 2", "Period 3" ,"Period 4","Period 5" ,"Period 6" ,"Period 7", "Period 8");
+                writeFile("Jan", "1" , null, null, "ComputerScience", null, null, null, null, null);
+                writeFile("Eli", "2" , null, null, "ComputerScience", null, null, null, null, null);
+                writeFile("Garrett", "3" , null, null, "ComputerScience", null, null, null, null, null);
+                writeFile("Mason", "4" , null, null, "ComputerScience", null, null, null, null, null);
+                writeFile("Albert", "1" , null, null, "ComputerScience", null, null, null, null, null);
             }
         }catch(Exception error){
-            System.out.println(error.getMessage());
+            System.out.println("There was an error writing.");
             return;
         }
     }
@@ -67,18 +79,21 @@ public class FHSSchedule {
                     five + " " + six + " " + seven + " " + eight);
             writer.newLine();
         }catch(Exception error){
-            System.out.println(error.getMessage());
+            System.out.println("The file was not written to.");
             return;
         }
     }
     
     private static void start(){ 
+        ArrayList<String> list = new ArrayList();
         loadFile();
         createReader();
-        writeFile("Jan", "1" , null, null, "ComputerScience", null, null, null, null, null);
         while(reader.hasNext()){
-            System.out.println(reader.nextLine());
+            list.add(reader.next());
         }
+        
+        System.out.println(list);
+        
         schedule.fillSchedule();
         //Student objects to store in various classes (Name, ID)
         Student Jan = new Student("Jan", 1);
