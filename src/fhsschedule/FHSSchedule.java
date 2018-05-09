@@ -7,8 +7,8 @@ import java.io.*;
 public class FHSSchedule {
     //Database object to store the school schedule
     private static Database schedule = new Database();
-    static ArrayList<Student> students = new ArrayList();
-    static ArrayList<Teacher> teachers = new ArrayList();
+    static ArrayList<Student> students = new ArrayList<Student>();
+    static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     
     //File Setup
     private static Scanner reader;
@@ -17,7 +17,7 @@ public class FHSSchedule {
     private static BufferedWriter writer;
     
     //New array to work with files
-    private static ArrayList<ArrayList<String>> fileList = new ArrayList();
+    private static ArrayList<ArrayList<String>> fileList = new ArrayList<ArrayList<String>>();
     
     public static void main(String[] args){
         //Immediately goes to the start funtion of the program
@@ -119,11 +119,20 @@ public class FHSSchedule {
         loadFile();
         createReader();
         fileToArray();
+        String studentInfo = "";
+        for (int i = 0; i < fileList.size(); i++) {
+            for (int j = 0; j < fileList.get(i).size(); j++) {
+                studentInfo += fileList.get(i).get(j) + " ";
+            }
+            System.out.println(studentInfo);
+            studentInfo = "";
+        }
         
-        //Prints the ArrayList Matrix which contains the name, id, and classes for all of the students.
+        //Prints the ArrayList Matrix which contains the name, id, and classes for all of the students.(For testing)
+        /*
         for (int i = 0; i < fileList.size(); i++) {
             System.out.println(fileList.get(i));
-        }
+        }*/
         
         schedule.fillSchedule();
         //Student objects to store in various classes (Name, ID)
