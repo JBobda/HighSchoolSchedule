@@ -43,7 +43,8 @@ public class FHSSchedule {
         try{
             //If this file doesn't exist it will create a new one with these entries and force user to restart the program.
             if(!scheduleFile.exists()){
-                System.out.println("Files missing, installing necessary files for the program");
+                System.out.println("Files missing, installing necessary files for the program...");
+                Thread.sleep(1500);
                 scheduleFile.createNewFile();
                 instantiateWriter();
                 writeFile("Name","ID" ,"Period1" ,"Period2", "Period3" ,"Period4","Period5" ,"Period6" ,"Period7", "Period8");
@@ -53,6 +54,7 @@ public class FHSSchedule {
                 writeFile("Mason", "4" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Albert", "1" , null, null, "ComputerScience", null, null, null, null, null);
                 System.out.println("Necessary files have been installed, please restart the program.");
+                closeWithExit();
                 System.exit(0);
             }
             //Otherwise it will continue with the existing schedule file
@@ -63,7 +65,7 @@ public class FHSSchedule {
         }
     }
     
-    public static void instantiateWriter(){
+    private static void instantiateWriter(){
         //Instantiate File reader
         try{
             baseWriter = new FileWriter(scheduleFile);
@@ -75,7 +77,7 @@ public class FHSSchedule {
         }
     }
     
-    public static void createReader(){
+    private static void createReader(){
         //This creates a scanner that is able to read through the file 
         try{
             reader = new Scanner(scheduleFile);
@@ -85,7 +87,7 @@ public class FHSSchedule {
         }
     }
     
-    public static void fileToArray(){
+    private static void fileToArray(){
         //Takes the contents of the file and places them into an ArrayList matrix
         int count = 0;
         int index = 0;
@@ -100,7 +102,7 @@ public class FHSSchedule {
             }
     }
     
-    public static void writeFile(String name, String ID, String one, String two, String three, String four,
+    private static void writeFile(String name, String ID, String one, String two, String three, String four,
             String five, String six ,String seven ,String eight){
         //This creates a filewriter to be able to store information in the schedule
         try{
@@ -355,15 +357,19 @@ public class FHSSchedule {
                     }
                     break;
                 case 8:
-                    //When the program ends, the writer is closed
-                    try {
-                        writer.close();
-                        baseWriter.close();
-                    } catch (Exception ex) {
-                        System.out.println("The file was closed properly.");
-                    }
+                    closeWithExit();
                     break ultraLoop;
             }
+        }
+    }
+    
+    private static void closeWithExit(){
+        //When the program ends, the writer is closed
+        try {
+            writer.close();
+            baseWriter.close();
+        } catch (Exception ex) {
+            System.out.println("The file was closed properly.");
         }
     }
     
