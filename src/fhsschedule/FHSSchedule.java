@@ -35,19 +35,12 @@ public class FHSSchedule {
             default: scheduleFile = new File("C:\\Users\\J.Bobda\\Desktop\\schedule_file.txt");
                 break;
         }
-
-        //Instantiate File reader
-        try{
-            baseWriter = new FileWriter(scheduleFile);
-            writer = new BufferedWriter(baseWriter);
-        }catch(Exception e){
-            System.out.println("There was an error.");
-            System.exit(0);
-        }
         
         try{
-            //Does this if file exists
-            if(scheduleFile.exists()){
+            //If this file doesn't exist it will create a new one with these entries
+            if(!scheduleFile.exists()){
+                scheduleFile.createNewFile();
+                instantiateWriter();
                 writeFile("Name","ID" ,"Period 1" ,"Period 2", "Period 3" ,"Period 4","Period 5" ,"Period 6" ,"Period 7", "Period 8");
                 writeFile("Jan", "1" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Eli", "2" , null, null, "ComputerScience", null, null, null, null, null);
@@ -55,9 +48,21 @@ public class FHSSchedule {
                 writeFile("Mason", "4" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Albert", "1" , null, null, "ComputerScience", null, null, null, null, null);
             }
+            //Otherwise it will continue with the existing schedule file
         }catch(Exception error){
             System.out.println("There was an error writing.");
             return;
+        }
+    }
+    
+    public static void instantiateWriter(){
+        //Instantiate File reader
+        try{
+            baseWriter = new FileWriter(scheduleFile);
+            writer = new BufferedWriter(baseWriter);
+        }catch(Exception e){
+            System.out.println("There was an error.");
+            System.exit(0);
         }
     }
     
