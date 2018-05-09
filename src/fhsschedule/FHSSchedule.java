@@ -125,6 +125,7 @@ public class FHSSchedule {
                 studentInfo += fileList.get(i).get(j) + " ";
             }
             System.out.println(studentInfo);
+            students.add(new Student(studentInfo));
             studentInfo = "";
         }
         
@@ -136,11 +137,11 @@ public class FHSSchedule {
         
         schedule.fillSchedule();
         //Student objects to store in various classes (Name, ID)
-        Student Jan = new Student("Jan", 1);
-        Student Eli = new Student("Eli", 2);
-        Student Garrett = new Student("Garrett", 3);
-        Student Mason = new Student("Mason" , 4);
-        Student Albert = new Student("Albert", 5);
+        Student Jan = new Student("Jan");
+        Student Eli = new Student("Eli");
+        Student Garrett = new Student("Garrett");
+        Student Mason = new Student("Mason");
+        Student Albert = new Student("Albert");
         
         //Teacher objects to store in various classes
         Teacher mReif = new Teacher("Mr.Reif", 1);
@@ -176,18 +177,19 @@ public class FHSSchedule {
                     System.out.println("");
                     break;
                 case 2:
+                    //NEEDS WORK NOT COMPLETE
                     //Enters Student
                     System.out.println("What Student would you like to add?");
                     String name = reader.next();
                     System.out.println("What is the student ID of your student");
                     long id = reader.nextLong();
-                    Student toBeEntered = new Student(name, id);
+                    Student toBeEntered = new Student(name);
                     for (int i = 0; i < students.size(); i++) {
                         if (students.get(i).equals(name, id)) {
                             toBeEntered = students.get(i);
                             break;
                         }
-                        toBeEntered = new Student(name, id);
+                        toBeEntered = new Student(name);
                     }
                     System.out.println("What class period would you like to add the student to?\n1st. 2nd. 3rd. 4th. 5th. 6th. 7th. 8th.");
                     int periodChoice = reader.nextInt();
