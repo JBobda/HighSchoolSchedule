@@ -16,6 +16,9 @@ public class FHSSchedule {
     private static FileWriter baseWriter;
     private static BufferedWriter writer;
     
+    //New array to work with files
+    private static ArrayList<ArrayList<String>> fileList = new ArrayList();
+    
     public static void main(String[] args){
         start();
     }
@@ -41,7 +44,7 @@ public class FHSSchedule {
             if(!scheduleFile.exists()){
                 scheduleFile.createNewFile();
                 instantiateWriter();
-                writeFile("Name","ID" ,"Period 1" ,"Period 2", "Period 3" ,"Period 4","Period 5" ,"Period 6" ,"Period 7", "Period 8");
+                writeFile("Name","ID" ,"Period1" ,"Period2", "Period3" ,"Period4","Period5" ,"Period6" ,"Period7", "Period8");
                 writeFile("Jan", "1" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Eli", "2" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Garrett", "3" , null, null, "ComputerScience", null, null, null, null, null);
@@ -76,6 +79,20 @@ public class FHSSchedule {
         }
     }
     
+    public static void fileToArray(){
+        int count = 0;
+        int index = 0;
+        fileList.add(new ArrayList<String>());
+        while(reader.hasNext()){
+                fileList.get(index).add(reader.next());
+                count++;
+                if(count % 10 == 0){
+                    fileList.add(new ArrayList<String>());
+                    index++;
+                }
+            }
+    }
+    
     public static void writeFile(String name, String ID, String one, String two, String three, String four,
             String five, String six ,String seven ,String eight){
         //This creates a filewriter to be able to store information in the schedule
@@ -90,14 +107,13 @@ public class FHSSchedule {
     }
     
     private static void start(){ 
-        ArrayList<String> list = new ArrayList();
         loadFile();
         createReader();
-        while(reader.hasNext()){
-            list.add(reader.next());
-        }
+        fileToArray();
         
-        System.out.println(list);
+        for (int i = 0; i < fileList.size(); i++) {
+            System.out.println(fileList.get(i));
+        }
         
         schedule.fillSchedule();
         //Student objects to store in various classes (Name, ID)
