@@ -20,12 +20,13 @@ public class FHSSchedule {
     private static ArrayList<ArrayList<String>> fileList = new ArrayList();
     
     public static void main(String[] args){
+        //Immediately goes to the start funtion of the program
         start();
     }
     
     public static void loadFile(){
         String operatingSystem = System.getProperty("os.name");
-        //This creates the file where the schedule will be stored
+        //Switch case for the various operating systems that could be used. Creates the file where the schedule will be stored
         switch(operatingSystem){
             case "Windows 7": scheduleFile = new File("C:\\Users\\J.Bobda\\Desktop\\schedule_file.txt");
                 break;
@@ -53,8 +54,9 @@ public class FHSSchedule {
             }
             //Otherwise it will continue with the existing schedule file
         }catch(Exception error){
+            //If there is an error with the saved information, the program will not continue.
             System.out.println("There was an error writing.");
-            return;
+            System.exit(0);
         }
     }
     
@@ -64,6 +66,7 @@ public class FHSSchedule {
             baseWriter = new FileWriter(scheduleFile);
             writer = new BufferedWriter(baseWriter);
         }catch(Exception e){
+            //If there is an error with the writer, the program will not continue because information could be lost.
             System.out.println("There was an error.");
             System.exit(0);
         }
@@ -80,6 +83,7 @@ public class FHSSchedule {
     }
     
     public static void fileToArray(){
+        //Takes the contents of the file and places them into an ArrayList matrix
         int count = 0;
         int index = 0;
         fileList.add(new ArrayList<String>());
@@ -101,7 +105,7 @@ public class FHSSchedule {
                     five + " " + six + " " + seven + " " + eight);
             writer.newLine();
         }catch(Exception error){
-            System.out.println("The file was not written to.");
+            System.out.println("Student was not saved to the database.");
             return;
         }
     }
@@ -111,6 +115,7 @@ public class FHSSchedule {
         createReader();
         fileToArray();
         
+        //Prints the ArrayList Matrix which contains the name, id, and classes for all of the students.
         for (int i = 0; i < fileList.size(); i++) {
             System.out.println(fileList.get(i));
         }
@@ -133,12 +138,12 @@ public class FHSSchedule {
         
         //Fills the school schedule with students
         schedule.enterStudent(schedule.getComputerScience(), Jan, 3);
-        //System.out.println(Jan.getPersonalSchedule()[2]);
         schedule.enterStudent(schedule.getComputerScience(), Eli, 3);
         schedule.enterStudent(schedule.getComputerScience(), Garrett, 3);
         schedule.enterStudent(schedule.getComputerScience(), Mason, 3);
         schedule.enterStudent(schedule.getComputerScience(), Albert, 3);
         
+        //Goes to the menu of the program to offer ways to change the schedule
         menu();
         
     }
@@ -319,6 +324,7 @@ public class FHSSchedule {
                     }
                     break;
                 case 6:
+                    //Views student's personal schedule
                     System.out.println("Which Student's schedule would you like to see?");
                     String studentChoice = reader.next();
                     System.out.println("What is that Student's ID?");
@@ -332,6 +338,7 @@ public class FHSSchedule {
                     }
                     break;
                 case 7:
+                    //Views teacher's personal schedule
                     System.out.println("Which Teacher's schedule would you like to see?");
                     String teacherChoice = reader.next();
                     System.out.println("What is that Teacher's ID?");
@@ -345,11 +352,12 @@ public class FHSSchedule {
                     }
                     break;
                 case 8:
+                    //When the program ends, the writer is closed
                     try {
                         writer.close();
                         baseWriter.close();
                     } catch (Exception ex) {
-                        System.out.println("The file was not created.");
+                        System.out.println("The file was closed properly.");
                     }
                     break ultraLoop;
             }
