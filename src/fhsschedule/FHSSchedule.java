@@ -41,8 +41,9 @@ public class FHSSchedule {
         }
         
         try{
-            //If this file doesn't exist it will create a new one with these entries
+            //If this file doesn't exist it will create a new one with these entries and force user to restart the program.
             if(!scheduleFile.exists()){
+                System.out.println("Files missing, installing necessary files for the program");
                 scheduleFile.createNewFile();
                 instantiateWriter();
                 writeFile("Name","ID" ,"Period1" ,"Period2", "Period3" ,"Period4","Period5" ,"Period6" ,"Period7", "Period8");
@@ -51,6 +52,8 @@ public class FHSSchedule {
                 writeFile("Garrett", "3" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Mason", "4" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Albert", "1" , null, null, "ComputerScience", null, null, null, null, null);
+                System.out.println("Necessary files have been installed, please restart the program.");
+                System.exit(0);
             }
             //Otherwise it will continue with the existing schedule file
         }catch(Exception error){
