@@ -10,10 +10,22 @@ public class Student implements FHSPeople{
     private Room [] personalSchedule = new Room[8];
     
     //Methods
-    public Student(String name, long studentID){
-        //This is here to instantiate the name of the student
-        this.name = name;
-        this.studentID = studentID;
+    public Student(String info){
+        //This is here to instantiate the info of the student
+        String[] storage = new String[10];
+        int count = 0;
+        int index = 0;
+        for (int i = 0; i < info.length(); i++) {
+            if(info.charAt(i) == ' '){
+                storage[index] = info.substring(count, i);
+                count = i+1;
+                index++;
+            }
+        }
+        
+        for (int i = 0; i < 10; i++) {
+            System.out.println(storage[i]);
+        }
         
     }
     
