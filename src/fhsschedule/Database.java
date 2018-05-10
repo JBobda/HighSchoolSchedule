@@ -12,7 +12,7 @@ public class Database {
     private Room band = new Room("Band", 5);
     private Room spanish = new Room("Spanish", 6);
     private Room german = new Room("German", 7);
-    private Room computerScience = new Room("Computer Science", 8);
+    private Room computerScience = new Room("ComputerScience", 8);
     private Room history = new Room("History", 9);
     private Room soccer = new Room("Soccer", 10);
     private ArrayList<Room> schedule = new ArrayList();

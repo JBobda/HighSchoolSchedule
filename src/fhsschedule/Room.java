@@ -4,23 +4,31 @@ import java.util.*;
 
 //Jan Bobda
 public class Room {
-    //Variables that each room will have
+    //Variables that each room will have, a pair of students and teachers for each period
     private String roomName;
     private int roomNumber;
+    //First Period
     private ArrayList<Teacher> teacherList1 = new ArrayList();
     private ArrayList<Student> studentList1 = new ArrayList();
+    //Second Period
     private ArrayList<Teacher> teacherList2 = new ArrayList();
     private ArrayList<Student> studentList2 = new ArrayList();
+    //Third Period
     private ArrayList<Teacher> teacherList3 = new ArrayList();
     private ArrayList<Student> studentList3 = new ArrayList();
+    //Fourth Period
     private ArrayList<Teacher> teacherList4 = new ArrayList();
     private ArrayList<Student> studentList4 = new ArrayList();
+    //Fifth Period
     private ArrayList<Teacher> teacherList5 = new ArrayList();
     private ArrayList<Student> studentList5 = new ArrayList();
+    //Sixth Period
     private ArrayList<Teacher> teacherList6 = new ArrayList();
     private ArrayList<Student> studentList6 = new ArrayList();
+    //Seventh Period
     private ArrayList<Teacher> teacherList7 = new ArrayList();
     private ArrayList<Student> studentList7 = new ArrayList();
+    //Eight Period
     private ArrayList<Teacher> teacherList8 = new ArrayList();
     private ArrayList<Student> studentList8 = new ArrayList();
     
@@ -61,8 +69,19 @@ public class Room {
         return teacherList1;
     }
     
+    public String getRoomName(){
+        return roomName;
+    }
+    
     public int getRoomNumber(){
         return roomNumber;
+    }
+    
+    public boolean equals(String roomName){
+        if(this.roomName.equals(roomName)){
+            return true;
+        }
+        return false;
     }
     
     public String toString(){

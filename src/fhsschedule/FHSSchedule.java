@@ -6,7 +6,7 @@ import java.io.*;
 //Jan Bobda
 public class FHSSchedule {
     //Database object to store the school schedule
-    private static Database schedule = new Database();
+    static Database schedule = new Database();
     static ArrayList<Student> students = new ArrayList<Student>();
     static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     
@@ -99,7 +99,8 @@ public class FHSSchedule {
                     fileList.add(new ArrayList<String>());
                     index++;
                 }
-            }
+        }
+        fileList.remove(0);
     }
     
     private static void writeFile(String name, String ID, String one, String two, String three, String four,
@@ -119,15 +120,34 @@ public class FHSSchedule {
         loadFile();
         createReader();
         fileToArray();
+        schedule.fillSchedule();
         String studentInfo = "";
+        //Loop that goes through the arraylist of string arraylists to move information into a string
         for (int i = 0; i < fileList.size(); i++) {
+            //Loop that goes through the arraylist of strings and adds it to the studentInfo 
             for (int j = 0; j < fileList.get(i).size(); j++) {
                 studentInfo += fileList.get(i).get(j) + " ";
             }
-            System.out.println(studentInfo);
-            students.add(new Student(studentInfo));
+            //System.out.println(studentInfo);
+            Student currentStudent = new Student(studentInfo);
+            students.add(currentStudent);
+            //Finds all of the classes that a student has and adds them to it
+            for (int j = 0; j < currentStudent.getPersonalSchedule().length; j++) {
+                for(int k = 0; k < schedule.getSchedule().size(); k++){
+                    if ((currentStudent.getPersonalSchedule()[j] != null ) && (currentStudent.getPersonalSchedule()[j].equals(schedule.getSchedule().get(k).getRoomName()))) {
+                        schedule.enterStudent(schedule.getSchedule().get(k), currentStudent, j+1);
+                    }
+                }
+            }
             studentInfo = "";
         }
+        
+        
+        for (int i = 0; i < students.get(2).getPersonalSchedule().length; i++) {
+            System.out.println(students.get(2).getPersonalSchedule()[i]);
+        }
+        
+        
         
         //Prints the ArrayList Matrix which contains the name, id, and classes for all of the students.(For testing)
         /*
@@ -135,7 +155,7 @@ public class FHSSchedule {
             System.out.println(fileList.get(i));
         }*/
         
-        schedule.fillSchedule();
+        /*
         //Student objects to store in various classes (Name, ID)
         Student Jan = new Student("Jan");
         Student Eli = new Student("Eli");
@@ -150,13 +170,15 @@ public class FHSSchedule {
         //Fills the school schedule with teachers
         schedule.enterTeacher(schedule.getScience(), mReif, 1);
         schedule.enterTeacher(schedule.getComputerScience(), eFaulkner, 3);
-        
+        */
         //Fills the school schedule with students
+        /*
         schedule.enterStudent(schedule.getComputerScience(), Jan, 3);
         schedule.enterStudent(schedule.getComputerScience(), Eli, 3);
         schedule.enterStudent(schedule.getComputerScience(), Garrett, 3);
         schedule.enterStudent(schedule.getComputerScience(), Mason, 3);
         schedule.enterStudent(schedule.getComputerScience(), Albert, 3);
+        */
         
         //Goes to the menu of the program to offer ways to change the schedule
         menu();
@@ -377,10 +399,14 @@ public class FHSSchedule {
     private static void closeWithExit(){
         //When the program ends, the writer is closed
         try {
-            writer.close();
-            baseWriter.close();
-        } catch (Exception ex) {
-            System.out.println("The file was closed properly.");
+            if (writer != null) {
+                writer.close();
+                baseWriter.close(); 
+            }
+            
+        } catch (IOException ex) {
+            //System.out.println("The file was closed properly.");
+            ex.printStackTrace();
         }
     }
     

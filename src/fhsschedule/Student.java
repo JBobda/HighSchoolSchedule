@@ -23,8 +23,18 @@ public class Student implements FHSPeople{
             }
         }
         
-        for (int i = 0; i < 10; i++) {
-            System.out.println(storage[i]);
+        name = storage[0];
+        //studentID = Long.parseLong(storage[1]);
+        
+        //Loop that goes through storage array
+        for (int i = 2; i < 10; i++) {
+            //Loop that goes through each of the room possibilities
+            for (int j = 0; j < FHSSchedule.schedule.getSchedule().size(); j++) {
+                if(FHSSchedule.schedule.getSchedule().get(j).equals(storage[i])){
+                    personalSchedule[i-2] = FHSSchedule.schedule.getSchedule().get(j);
+                    break;
+                }
+            }
         }
         
     }
