@@ -24,7 +24,7 @@ public class Student implements FHSPeople{
         }
         
         name = storage[0];
-        //studentID = Long.parseLong(storage[1]);
+        studentID = Long.parseLong(storage[1]);
         
         //Loop that goes through storage array
         for (int i = 2; i < 10; i++) {

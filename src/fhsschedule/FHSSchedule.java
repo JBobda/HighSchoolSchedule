@@ -101,6 +101,7 @@ public class FHSSchedule {
                 }
         }
         fileList.remove(0);
+        fileList.remove(fileList.size()-1);
     }
     
     private static void writeFile(String name, String ID, String one, String two, String three, String four,
@@ -128,24 +129,29 @@ public class FHSSchedule {
             for (int j = 0; j < fileList.get(i).size(); j++) {
                 studentInfo += fileList.get(i).get(j) + " ";
             }
-            //System.out.println(studentInfo);
+            
             Student currentStudent = new Student(studentInfo);
-            //students.add(currentStudent);
             //Finds all of the classes that a student has and adds them to it
+            boolean isAdded = false;
             for (int j = 0; j < currentStudent.getPersonalSchedule().length; j++) {
                 for(int k = 0; k < schedule.getSchedule().size(); k++){
                     if ((currentStudent.getPersonalSchedule()[j] != null ) && (currentStudent.getPersonalSchedule()[j].equals(schedule.getSchedule().get(k).getRoomName()))) {
                         schedule.enterStudent(schedule.getSchedule().get(k), currentStudent, j+1);
+                        isAdded = true;
                     }
                 }
+            }
+            //If the student does not have any classes, it will add them here
+            if (isAdded ==  false) {
+                    students.add(currentStudent);
             }
             studentInfo = "";
         }
         
-        
+        /*
         for (int i = 0; i < students.size(); i++) {
             System.out.println(students.get(i));
-        }
+        }*/
         
         
         
