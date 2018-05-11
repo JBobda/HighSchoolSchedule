@@ -130,7 +130,7 @@ public class FHSSchedule {
             }
             //System.out.println(studentInfo);
             Student currentStudent = new Student(studentInfo);
-            students.add(currentStudent);
+            //students.add(currentStudent);
             //Finds all of the classes that a student has and adds them to it
             for (int j = 0; j < currentStudent.getPersonalSchedule().length; j++) {
                 for(int k = 0; k < schedule.getSchedule().size(); k++){
@@ -143,8 +143,8 @@ public class FHSSchedule {
         }
         
         
-        for (int i = 0; i < students.get(2).getPersonalSchedule().length; i++) {
-            System.out.println(students.get(2).getPersonalSchedule()[i]);
+        for (int i = 0; i < students.size(); i++) {
+            System.out.println(students.get(i));
         }
         
         
