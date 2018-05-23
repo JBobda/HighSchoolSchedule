@@ -15,7 +15,7 @@ public class Database {
     private Room computerScience = new Room("ComputerScience", 8);
     private Room history = new Room("History", 9);
     private Room soccer = new Room("Soccer", 10);
-    private ArrayList<Room> schedule = new ArrayList();
+    private ArrayList<Room> schedule = new ArrayList<Room>();
     
     //Methods
     protected void fillSchedule(){
@@ -40,7 +40,7 @@ public class Database {
     }
     
     protected void enterStudent(Room classRoom, Student student, int period){
-        FHSSchedule.students.add(student);
+        FHSSchedule.getStudents().add(student);
         if(classRoom.equals(getScience())){
             getScience().getStudents(period).add(student);
             student.getPersonalSchedule()[period -1] = classRoom;
@@ -77,7 +77,7 @@ public class Database {
     }
     
     protected void enterTeacher(Room classRoom, Teacher teacher, int period){
-        FHSSchedule.teachers.add(teacher);
+        FHSSchedule.getTeachers().add(teacher);
         if(classRoom.equals(getScience())){
             getScience().getTeachers(period).add(teacher);
             teacher.getPersonalSchedule()[period -1] = classRoom;

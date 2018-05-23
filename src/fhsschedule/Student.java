@@ -29,9 +29,9 @@ public class Student implements FHSPeople{
         //Loop that goes through storage array
         for (int i = 2; i < 10; i++) {
             //Loop that goes through each of the room possibilities
-            for (int j = 0; j < FHSSchedule.schedule.getSchedule().size(); j++) {
-                if(FHSSchedule.schedule.getSchedule().get(j).equals(storage[i])){
-                    personalSchedule[i-2] = FHSSchedule.schedule.getSchedule().get(j);
+            for (int j = 0; j < FHSSchedule.getSchedule().getSchedule().size(); j++) {
+                if(FHSSchedule.getSchedule().getSchedule().get(j).equals(storage[i])){
+                    personalSchedule[i-2] = FHSSchedule.getSchedule().getSchedule().get(j);
                     break;
                 }
             }

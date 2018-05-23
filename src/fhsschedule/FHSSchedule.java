@@ -6,9 +6,9 @@ import java.io.*;
 //Jan Bobda
 public class FHSSchedule {
     //Database object to store the school schedule
-    static Database schedule = new Database();
-    static ArrayList<Student> students = new ArrayList<Student>();
-    static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+    private static Database schedule = new Database();
+    private static ArrayList<Student> students = new ArrayList<Student>();
+    private static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     
     //File Setup
     private static Scanner reader;
@@ -109,7 +109,7 @@ public class FHSSchedule {
                     five + " " + six + " " + seven + " " + eight);
             writer.newLine();
             writer.close();
-            System.out.println("File was added!");
+            //System.out.println("File was added!");
         }catch(IOException error){
             error.printStackTrace();
             return;
@@ -147,7 +147,7 @@ public class FHSSchedule {
             studentInfo = "";
         }
         
-        writeFile("Garrett", "3" , null, null, "ComputerScience", null, null, null, null, null);
+        //writeFile("Garrett", "3" , null, null, "ComputerScience", null, null, null, null, null);
         /*
         for (int i = 0; i < students.size(); i++) {
             System.out.println(students.get(i));
@@ -414,6 +414,18 @@ public class FHSSchedule {
             //System.out.println("The file was closed properly.");
             ex.printStackTrace();
         }
+    }
+    
+    public static Database getSchedule(){
+        return schedule;
+    }
+    
+    public static ArrayList<Student> getStudents(){
+        return students;
+    }
+    
+    public static ArrayList<Teacher> getTeachers(){
+        return teachers;
     }
     
 }
