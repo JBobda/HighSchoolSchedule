@@ -44,18 +44,14 @@ public class FHSSchedule {
             //If this file doesn't exist it will create a new one with these entries and force user to restart the program.
             if(!scheduleFile.exists()){
                 System.out.println("Files missing, installing necessary files for the program...");
-                Thread.sleep(1500);
                 scheduleFile.createNewFile();
-                instantiateWriter();
+                //instantiateWriter();
                 writeFile("Name","ID" ,"Period1" ,"Period2", "Period3" ,"Period4","Period5" ,"Period6" ,"Period7", "Period8");
                 writeFile("Jan", "1" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Eli", "2" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Garrett", "3" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Mason", "4" , null, null, "ComputerScience", null, null, null, null, null);
                 writeFile("Albert", "1" , null, null, "ComputerScience", null, null, null, null, null);
-                System.out.println("Necessary files have been installed, please restart the program.");
-                closeWithExit();
-                System.exit(0);
             }
             //Otherwise it will continue with the existing schedule file
         }catch(Exception error){
@@ -68,7 +64,7 @@ public class FHSSchedule {
     private static void instantiateWriter(){
         //Instantiate File reader
         try{
-            baseWriter = new FileWriter(scheduleFile);
+            baseWriter = new FileWriter(scheduleFile, true);
             writer = new BufferedWriter(baseWriter);
         }catch(Exception e){
             //If there is an error with the writer, the program will not continue because information could be lost.
@@ -107,12 +103,15 @@ public class FHSSchedule {
     private static void writeFile(String name, String ID, String one, String two, String three, String four,
             String five, String six ,String seven ,String eight){
         //This creates a filewriter to be able to store information in the schedule
+        instantiateWriter();
         try{
             writer.write(name + " " + ID + " " + one + " " + two + " " + three + " " + four + " " + 
                     five + " " + six + " " + seven + " " + eight);
             writer.newLine();
-        }catch(Exception error){
-            System.out.println("Student was not saved to the database.");
+            writer.close();
+            System.out.println("File was added!");
+        }catch(IOException error){
+            error.printStackTrace();
             return;
         }
     }
@@ -148,6 +147,7 @@ public class FHSSchedule {
             studentInfo = "";
         }
         
+        writeFile("Garrett", "3" , null, null, "ComputerScience", null, null, null, null, null);
         /*
         for (int i = 0; i < students.size(); i++) {
             System.out.println(students.get(i));
